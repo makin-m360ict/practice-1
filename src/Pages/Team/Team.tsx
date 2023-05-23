@@ -1,9 +1,10 @@
-import { Card, Col, Row, Space } from "antd"
-import { useSelector } from "react-redux"
+import { Button, Card, Col, Row, Space } from "antd"
+import { useDispatch, useSelector } from "react-redux"
+import { removeFromTeam } from "../../features/makeTeam/teamSlice"
 
 export default function Team() {
   const data = useSelector((state: any) => state.team.team)
-  console.log(data, 'TEAM')
+  const dispatch = useDispatch()
   return (
     <>
       <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}  >
@@ -15,6 +16,7 @@ export default function Team() {
               }} bodyStyle={{ backgroundColor: "#595959", color: "white" }}>
                 <p>{member?.username}</p>
                 <p>{member?.website}</p>
+                <Button onClick={() => dispatch(removeFromTeam(member?.id))}>Remove</Button>
               </Card>
             </Col>
           ))
